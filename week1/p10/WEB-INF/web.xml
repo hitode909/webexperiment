@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<web-app>
+  <servlet>
+    <servlet-name>P10TestServlet</servlet-name>
+    <servlet-class>p10.P10TestServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>P10TestServlet</servlet-name>
+    <url-pattern>/servlets/P10TestServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

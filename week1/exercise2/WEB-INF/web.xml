@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<web-app>
+  <servlet>
+    <servlet-name>CurrentDateServlet</servlet-name>
+    <servlet-class>exercise2.CurrentDateServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>CurrentDateServlet</servlet-name>
+    <url-pattern>/servlets/CurrentDateServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
