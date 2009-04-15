@@ -1,0 +1,107 @@
+* 環境構築
+** Tomcat 6.0.18をインストール
+
+>||
+port search tomact
+
+tomcat6 @6.0.18 (java, www)
+    Tomcat 6 HTTP Server and Java Servlet Container.
+||<
+
+なので、
+
+>||
+port install tomcat6
+||<
+
+(中略)
+
+||>
++R sudo env http_proxy=http://proxy.ritsumei.ac.jp:3128 port install -d servlet24-api
+--->  Verifying checksum(s) for servlet24-api
+Error: Checksum (md5) mismatch for apache-tomcat-5.5.25-src.tar.gz
+Error: Target org.macports.checksum returned: Unable to verify file checksums
+Error: Status 1 encountered during processing.   
++R
+||<
+
+方針を変えて、MacPortsを使わない
+
+Mac OS X LeopardにTomcat6をインストールしてみた at HouseTect, JavaScripter Blog
+http://hisasann.com/housetect/2008/05/mac_os_x_leopardtomcat6.html
+
+これの通りにやる
+最新版を取ってくるとTomcatのバージョンが違うので気をつける
+
+>||
+% cd /usr/local/tomcat
+% ls 
+apache-tomcat-6.0.18    current
+% ls -l 
+total 8
+drwxr-xr-x  13 fkd   staff  442  4 15 13:37 apache-tomcat-6.0.18
+lrwxr-xr-x   1 root  wheel   38  4 15 13:43 current -> /usr/local/tomcat/apache-tomcat-6.0.18
+% 
+||<
+
+/usr/local/tomcat/current/webapps/ROOT にファイルを置くとアクセスできるはず
+運用的にどうするかはよく分からないのであとで調べる
+
+webapps/ROOT/exercise1.html
+
+>>
+<html>
+  <head>
+    <title>こんにちは</title>
+  </head>
+  <body>
+    <h1>こんにちは</h1>
+    <p>こんにちはこんにちは</p>
+  </body>
+</html>
+<<
+
+http://localhost:8080/exercise1.html
+にアクセスして正しく表示されることを確認した。
+
+** LiveHTTPHeaders
+普通に入れる
+普通に確認する
+
+200, 304
+
+
+** Eclipseのインストール
+以前普通に入れたものを使う
+
+** Eclipse用のTomcat Plugin
+http://www.eclipsetotale.com/tomcatPlugin.html
+V321
+
+ウィンドウの設定はEclipseのPreference
+
+** プロジェクト作る
+p10というのを作った(レジュメの10ページに対応するので)
+
+
+** 作業
+普通にやる
+
+- キーバインドをEmacsに変更
+
+** P12 Servletプログラムの組み込み
+>||
+<servlet-class>p10.P10TestServlet</servlet-class>
+||<
+パッケージ名.クラス名?
+パッケージ名は小文字から始まるらしいので気をつける
+
+** 練習課題３
+JSPでimportするには
+
+<%@ page contentType="text/html; charset=utf8" import="java.util.Date" %>
+
+というふうに、最初のヘッダみたいなところに書いておく
+
+ＪＳＰリファレンス（@page：import、session）
+http://struts.wasureppoi.com/jsp/05_import.html
