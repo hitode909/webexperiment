@@ -105,3 +105,13 @@ JSPでimportするには
 
 ＪＳＰリファレンス（@page：import、session）
 http://struts.wasureppoi.com/jsp/05_import.html
+
+
+** まとめ
+- 一通りできた
+- Eclipseのプロジェクトはコミットできていない
+- gitignoreにいろいろ追加する必要がありそう
+
+** プロジェクトについて
+まだ流動的な感じなので、課題ごとにプロジェクトを作ってみている
+そのうちうまくやりたい
