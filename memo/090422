@@ -1,0 +1,77 @@
+* MySQLのインストール
+
+LeopardにMySQLとDBD::mysqlを入れる方法 - Do you read me?
+http://d.hatena.ne.jp/seagirl/20080207/1202385950
+
+これの通りに。
+
+-> 20分くらいかかった
+
+ログ
+--->  Fetching mysql5
+--->  Attempting to fetch mysql-5.0.75.tar.gz from http://mysql.mirrors.pair.com/Downloads/MySQL-5.0/
+--->  Verifying checksum(s) for mysql5
+--->  Extracting mysql5
+--->  Applying patches to mysql5
+--->  Configuring mysql5
+--->  Building mysql5
+--->  Staging mysql5 into destroot
+--->  Creating launchd control script
+###########################################################
+# A startup item has been generated that will aid in
+# starting mysql5 with launchd. It is disabled
+# by default. Execute the following command to start it,
+# and to cause it to launch at startup:
+#
+# sudo launchctl load -w /Library/LaunchDaemons/org.macports.mysql5.plist
+###########################################################
+--->  Installing mysql5 @5.0.75_0+server
+******************************************************
+* In order to setup the database, you might want to run
+* Sudo -u mysql mysql_install_db5
+* if this is a new install
+******************************************************
+--->  Activating mysql5 @5.0.75_0+server
+--->  Cleaning mysql5
+sudo env http_proxy=http://proxy.ritsumei.ac.jp:3128 port install -d mysql5   435.43s user 168.14s system 54% cpu 18:29.56 total  
+
+
+
+Sudo -u mysql mysql_install_db5するとセットアップされる
+rootにパスワードなしでつなげるようになった
+
+* 設定する
+レジュメ通りにユーザーを作成
+
+load dataする
+日本語は文字化けするがレコードが作成される
+
+* JDBC
+MySQL :: Download Connector/J 5.1
+http://dev.mysql.com/downloads/connector/j/5.1.html
+
+ユーザー登録が必要だったので教材フォルダからscpでとってきた。
+
+
+* 先週作ったものを動かしてみる
+- Start Tomcat
+- http://localhost:8080/JSP/jsptest.jsp にアクセス
+正しく表示された。
+
+
+* 練習課題４
+form.htmlから送ってresult(jsp)で表示するのをやる
+
+form.htmlを普通に作ったらアクセスできた
+form.jspで表示できた
+XSS対策されてない
+
+* 練習課題５
+jdbcをlib/に入れたあとにTomcatの再起動が必要
+
+* 練習課題６
+バリデーション
+alert出すだけ
+
+
+練習課題おわり

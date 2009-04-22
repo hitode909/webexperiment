@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>バリデーション付き個人情報公開フォーム</title>
+    <script language="javascript">
+      function validate() {
+	  var name = document.form1.name.value;
+	  var address = document.form1.address.value;
+	  var result = true;
+          if ( name == '' ) {
+	      alert('名前を入れてください。');
+	      result = false;
+	  }
+          if ( address== '' ) {
+	      alert('住所を入れてください。');
+	      result = false;
+	  }
+	  return result;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>個人情報を送信しましょう、必ず入力してください</h1>
+
+    <form name="form1" action="./result.jsp" method="POST">
+      <p>名前<input type="text" name="name" size="30" /></p>
+      <p>住所<input type="text" name="address" size="60" /></p>
+    <p><input type="submit" value="送信" onclick="return validate();">
+    </form>
+  </body>
+</html>
