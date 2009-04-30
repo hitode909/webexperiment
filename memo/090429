@@ -1,0 +1,6 @@
+GETが文字化け
+
+＠IT：Javaの文字化け対策FAQ（3）
+http://www.atmarkit.co.jp/fjava/rensai3/mojibake03/mojibake03.html
+
+useBodyEncodingForURI="true"
