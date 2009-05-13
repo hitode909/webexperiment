@@ -1,9 +1,4 @@
 package application;
-import java.sql.*;
-import java.util.ArrayList;
-
-
-import model.Book;
 
 //JSPが使うためのインターフェイス
 public class Application {
