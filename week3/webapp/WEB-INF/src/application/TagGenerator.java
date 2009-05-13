@@ -20,10 +20,9 @@ public class TagGenerator {
 
 	private String bookTableTr(Book book){
 		String result = new String();
-		result += pinched("td", pinchedWithOption("a", "href=book.jsp?id="+book.id, book.title));
-		result += pinched("td", pinchedWithOption("a", "href=search.jsp?query="+book.author, book.author));
-		result += pinched("td", pinchedWithOption("a", "href=search.jsp?query="+book.publisher, book.publisher));
-		//result += ;
+		result += pinched("td", pinchedWithOption("a", "href=\"book.jsp?id="+book.id+ "\"", book.title));
+		result += pinched("td", searchlink(book.author));
+		result += pinched("td", searchlink(book.publisher));
 		return pinched("tr", result) + "\n";
 	}
 	private String bookTableTh(){
@@ -42,7 +41,10 @@ public class TagGenerator {
 			Book b = it.next();
 		    result += bookTableTr(b);
 		}
-		return pinched("table", result);
-		
+		return pinchedWithOption("table","border=\"1\"", result);		
+	}
+	
+	public String searchlink(String query){
+		return pinchedWithOption("a", "href=\"index.jsp?search="+query+"\"", query);
 	}
 }

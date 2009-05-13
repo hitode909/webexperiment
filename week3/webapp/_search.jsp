@@ -12,9 +12,9 @@
   String query = request.getParameter("search");
   Boolean has_query = !(query == null || query.length() == 0);
   if( has_query ){
-    books = app.searchBooks(query);
+    books = app.dbi.searchBooks(query);
   }else{
-    books = app.books();
+    books = app.dbi.getAllBooks();
   }
 %>
 

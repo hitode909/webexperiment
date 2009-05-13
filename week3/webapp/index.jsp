@@ -5,24 +5,27 @@
             application.*,
 	    model.*"
 %>
-<% request.setCharacterEncoding("UTF-8");%> 
-<html>
-<head>
-<title>JSP</title>
 
-<body>
-<h1>本サービス2.0</h1>
-
-<jsp:include page="_searchform.jsp" flush="true" />
-
-<h2>最近登録された本</h2>
 <%
-  Application app = new  Application();
-
-  ArrayList<Book> books = app.books();
-  out.println(app.tagg.bookTable(books));
+request.setCharacterEncoding("UTF-8");
+Application app = new  Application();
+Boolean has_search_query = (request.getParameter("search") != null);
 %>
-<h2>本を登録</h2>
-あとで
-</body>
-</html>
+
+<% if(has_search_query){ %>
+  <jsp:include page="_header.jsp" flush="true" >
+  <jsp:param name="title" value="本を検索中" />
+  </jsp:include>
+<% }else{ %>
+  <jsp:include page="_header.jsp" flush="true" >
+  <jsp:param name="title" value="こんにちは" />
+  </jsp:include>
+<% } %>
+
+<jsp:include page="_search.jsp" flush="true" />
+
+<% if(!has_search_query){ %>
+<jsp:include page="_newbook.jsp" flush="true" />
+<% } %>
+
+<jsp:include page="_footer.jsp" flush="true" />

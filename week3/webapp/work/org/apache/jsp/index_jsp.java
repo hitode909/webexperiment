@@ -55,30 +55,41 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
 
       out.write('\n');
- request.setCharacterEncoding("UTF-8");
-      out.write(" \n");
-      out.write("<html>\n");
-      out.write("<head>\n");
-      out.write("<title>JSP</title>\n");
-      out.write("\n");
-      out.write("<body>\n");
-      out.write("<h1>本サービス2.0</h1>\n");
-      out.write("\n");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_searchform.jsp", out, true);
-      out.write("\n");
-      out.write("\n");
-      out.write("<h2>最近登録された本</h2>\n");
+      out.write('\n');
 
-  Application app = new  Application();
+request.setCharacterEncoding("UTF-8");
+Application app = new  Application();
+Boolean has_search_query = (request.getParameter("search") != null);
 
-  ArrayList<Book> books = app.books();
-  out.println(app.tagg.bookTable(books));
-
-      out.write("\n");
-      out.write("<h2>本を登録</h2>\n");
-      out.write("あとで\n");
-      out.write("</body>\n");
-      out.write("</html>");
+      out.write('\n');
+      out.write('\n');
+ if(has_search_query){ 
+      out.write('\n');
+      out.write(' ');
+      out.write(' ');
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_header.jsp" + (("_header.jsp").indexOf('?')>0? '&': '?') + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode("title", request.getCharacterEncoding())+ "=" + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode("本を検索中", request.getCharacterEncoding()), out, true);
+      out.write('\n');
+ }else{ 
+      out.write('\n');
+      out.write(' ');
+      out.write(' ');
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_header.jsp" + (("_header.jsp").indexOf('?')>0? '&': '?') + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode("title", request.getCharacterEncoding())+ "=" + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode("こんにちは", request.getCharacterEncoding()), out, true);
+      out.write('\n');
+ } 
+      out.write('\n');
+      out.write('\n');
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_search.jsp", out, true);
+      out.write('\n');
+      out.write('\n');
+ if(!has_search_query){ 
+      out.write('\n');
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_newbook.jsp", out, true);
+      out.write('\n');
+ } 
+      out.write('\n');
+      out.write('\n');
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_footer.jsp", out, true);
+      out.write('\n');
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

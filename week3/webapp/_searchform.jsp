@@ -3,7 +3,7 @@
 %>
 
 <h2>本を検索</h2>
-<form action="./search.jsp" method="GET">
+<form action="./" method="GET">
   <p><input type="text" name="query" size="30"
 <% 
 if( request.getParameter("query") != null ) {

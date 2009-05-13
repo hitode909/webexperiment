@@ -53,7 +53,7 @@ public final class _005fsearchform_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("\n");
       out.write("\n");
       out.write("<h2>本を検索</h2>\n");
-      out.write("<form action=\"./search.jsp\" method=\"GET\">\n");
+      out.write("<form action=\"./\" method=\"GET\">\n");
       out.write("  <p><input type=\"text\" name=\"query\" size=\"30\"\n");
  
 if( request.getParameter("query") != null ) {

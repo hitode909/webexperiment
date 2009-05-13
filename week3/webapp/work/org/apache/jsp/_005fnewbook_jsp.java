@@ -3,11 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import java.util.ArrayList;
-import application.*;
-import model.*;
 
-public final class search_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class _005fnewbook_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -53,58 +50,36 @@ public final class search_jsp extends org.apache.jasper.runtime.HttpJspBase
       out = pageContext.getOut();
       _jspx_out = out;
 
-      out.write('\n');
-      out.write('\n');
-
-  request.setCharacterEncoding("UTF-8");
-  Application app = new  Application();
-  ArrayList<Book> books;
-  String query = request.getParameter("search");
-  Boolean has_query = !(query == null || query.length() == 0);
-  if( has_query ){
-    books = app.searchBooks(query);
-  }else{
-    books = app.books();
-  }
-
       out.write("\n");
       out.write("\n");
-      out.write("<form action=\"./\" method=\"GET\">\n");
-      out.write("  <p><input type=\"text\" name=\"search\" size=\"30\"\n");
- 
-if( has_query ) {
-   out.println("value=\"" + query + "\"");
-}
-
-      out.write("\n");
-      out.write("  /><input type=\"submit\" value=\"検索\"></p>\n");
+      out.write("<h2>本を登録</h2>\n");
+      out.write("<form action=\"./book.jsp\" method=\"GET\">\n");
+      out.write("  <table>\n");
+      out.write("    <tr>\n");
+      out.write("      <td>書名</td>\n");
+      out.write("      <td><input type=\"text\" name=\"title\" size=\"30\"></td>\n");
+      out.write("    </tr>\n");
+      out.write("    <tr>\n");
+      out.write("      <td>著者</td>\n");
+      out.write("      <td><input type=\"text\" name=\"author\" size=\"30\"></td>\n");
+      out.write("    </tr>\n");
+      out.write("    <tr>\n");
+      out.write("      <td>出版社</td>\n");
+      out.write("      <td><input type=\"text\" name=\"publisher\" size=\"30\"></td>\n");
+      out.write("    </tr>\n");
+      out.write("    <tr>\n");
+      out.write("      <td>価格</td>\n");
+      out.write("      <td><input type=\"text\" name=\"price\" size=\"30\"></td>\n");
+      out.write("    </tr>\n");
+      out.write("    <tr>\n");
+      out.write("      <td>ISBN</td>\n");
+      out.write("      <td><input type=\"text\" name=\"isbn\" size=\"30\"></td>\n");
+      out.write("    </tr>\n");
+      out.write("    <tr><td>\n");
+      out.write("\t<input type=\"submit\" value=\"登録\">\n");
+      out.write("    </td></tr>\n");
+      out.write("  </table>\n");
       out.write("</form>\n");
-      out.write("\n");
- if( has_query ){
-     if( books.size() > 0 ){
-
-      out.write("\n");
-      out.write("<p>&quot;");
- out.println(query); 
-      out.write("&quot;で検索して");
- out.println(books.size()); 
-      out.write("件ヒットしました。</p>\n");
-
-     out.println(app.tagg.bookTable(books));
-   }else{ 
-      out.write("\n");
-      out.write("<p>&quot;");
- out.println(query); 
-      out.write("&quot;で検索してヒットしませんでした。</p>\n");
-   }
-   } else {
-     out.println(app.tagg.bookTable(books));
-   }
- 
-      out.write("\n");
-      out.write("\n");
-      out.write("</body>\n");
-      out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

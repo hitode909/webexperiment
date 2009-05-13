@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import application.*;
 import model.*;
 
-public final class search_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class _005fsearch_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -62,9 +62,9 @@ public final class search_jsp extends org.apache.jasper.runtime.HttpJspBase
   String query = request.getParameter("search");
   Boolean has_query = !(query == null || query.length() == 0);
   if( has_query ){
-    books = app.searchBooks(query);
+    books = app.dbi.searchBooks(query);
   }else{
-    books = app.books();
+    books = app.dbi.getAllBooks();
   }
 
       out.write("\n");

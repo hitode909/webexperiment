@@ -60,30 +60,84 @@ public final class book_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write('\n');
 
   Application app = new  Application();
+  Book book;
   String id = request.getParameter("id");
-  Book book = app.dbi.retrieveBookById(Integer.parseInt(id));
+  Boolean has_book = !(id == null || id.length() == 0);
+  Boolean creating_book = false;
+
+  if(has_book){
+    book = app.dbi.retrieveBookById(Integer.parseInt(id));
+    if(book == null){
+      has_book = false;
+    }
+  } else {
+    book = app.dbi.createBook(
+      request.getParameter("title"),
+      request.getParameter("author"),
+      request.getParameter("publisher"),
+      request.getParameter("price"),
+      request.getParameter("isbn"));
+    if(book != null){
+      has_book = true;
+    }
+  }
+
+      out.write('\n');
+      out.write('\n');
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_header.jsp" + (("_header.jsp").indexOf('?')>0? '&': '?') + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode("title", request.getCharacterEncoding())+ "=" + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode("本の詳細", request.getCharacterEncoding()), out, true);
+      out.write('\n');
+      out.write('\n');
+ if(has_book){ 
+      out.write("\n");
+      out.write("<table border=\"1\" >\n");
+      out.write("<tr>\n");
+      out.write("  <td>書名</td>\n");
+      out.write("  <td>");
+ out.println(book.title); 
+      out.write("</td>\n");
+      out.write("</tr>\n");
+      out.write("<tr>\n");
+      out.write("  <td>著者</td>\n");
+      out.write("  <td>");
+ out.println(book.author); 
+      out.write("</td>\n");
+      out.write("</tr>\n");
+      out.write("<tr>\n");
+      out.write("  <td>出版社</td>\n");
+      out.write("  <td>");
+ out.println(app.tagg.searchlink(book.publisher)); 
+      out.write("</td>\n");
+      out.write("</tr>\n");
+      out.write("<tr>\n");
+      out.write("  <td>価格</td>\n");
+      out.write("  <td>");
+ out.println(book.price); 
+      out.write("円</td>\n");
+      out.write("</tr>\n");
+      out.write("<tr>\n");
+      out.write("  <td>ISBN</td>\n");
+      out.write("  <td>");
+ out.println(book.isbn); 
+      out.write("</td>\n");
+      out.write("</tr>\n");
+      out.write("</table>\n");
+      out.write("\n");
+ }else{
+     if(creating_book){
 
       out.write("\n");
+      out.write("<p>本の登録に失敗しました。各項目には必ず何か入力してください。</p>\n");
+   }else{ 
       out.write("\n");
-      out.write("<html>\n");
-      out.write("<head>\n");
-      out.write("<title>");
- out.println(book.title); 
-      out.write("</title>\n");
-      out.write("<body>\n");
-      out.write("<h1>");
- out.println(app.tagg.paragraph(book.title)); 
-      out.write("</h1>\n");
- out.println(app.tagg.paragraph(book.author)); 
+      out.write("<p>指定された本が見つかりませんでした。</p>\n");
+   }
+   }
+
       out.write('\n');
- out.println(app.tagg.paragraph(book.publisher)); 
       out.write('\n');
- out.println(app.tagg.paragraph(book.price + "円")); 
       out.write('\n');
- out.println(app.tagg.paragraph(book.isbn)); 
-      out.write("\n");
-      out.write("</body>\n");
-      out.write("</html>");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_footer.jsp", out, true);
+      out.write('\n');
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

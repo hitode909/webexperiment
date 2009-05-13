@@ -17,9 +17,8 @@ public class DBI {
 	
 	// SQL文を実行してBookのArrayListを得る
 	// FIXME: PreparedStatementを得るようにする
-	public ArrayList<Book> getBooks(String sql) throws SQLException {
-		Statement statement = connection.createStatement();
-		ResultSet rs = statement.executeQuery(sql);
+	public ArrayList<Book> getBooks(PreparedStatement ps) throws SQLException {
+		ResultSet rs = ps.executeQuery();
 		ArrayList<Book> result = new ArrayList<Book>();
 
 		while(rs.next()){
@@ -28,18 +27,58 @@ public class DBI {
 		}
 		return result;
 	}
-
+	
+	public Book getBook(PreparedStatement ps) throws SQLException {
+		ResultSet rs = ps.executeQuery();
+		if(rs.next()){
+			return Book.parseResultSet(rs);
+		}else{
+			return null;
+		}
+	}
+	
+	public ArrayList<Book> getAllBooks() throws SQLException {
+		PreparedStatement ps  = connection.prepareStatement("select * from booklist");
+		return getBooks(ps);
+	}
+	
 	public ArrayList<Book> searchBooks(String query) throws SQLException {
-		String sql = "select * from booklist where title like \"%" + query + "%\" or author like \"%" + query + "%\" or publisher like \"%" + query + "%\";";
-		return getBooks(sql);
+		PreparedStatement ps  = connection.prepareStatement("select * from booklist where title like ? or author like ? or publisher like ?");
+		String likequery = "%" + query + "%";
+		ps.setString(1,likequery);
+		ps.setString(2,likequery);
+		ps.setString(3,likequery);
+		return getBooks(ps);
+	}
+	
+	public Book retrieveBookByIsbn(String isbn) throws SQLException {
+		PreparedStatement ps  = connection.prepareStatement("select * from booklist where isbn = ?");
+		ps.setString(1,isbn);
+		return getBook(ps);
 	}
 	
 	public Book retrieveBookById(Integer id) throws SQLException {
 		PreparedStatement ps  = connection.prepareStatement("select * from booklist where id = ?");
 		ps.setInt(1,id);
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		return Book.parseResultSet(rs);
+		return getBook(ps);
+	}
+	
+	public Book createBook(String title, String author, String publisher, String price, String isbn) throws SQLException {
+		if(title.length() == 0 || author.length() == 0 || publisher.length() == 0 || price.length() == 0 || isbn.length() == 0){
+			return null;
+		}
+		PreparedStatement ps  = connection.prepareStatement("insert into booklist values(null,?,?,?,?,?)");
+		ps.setString(1, title);	
+		ps.setString(2, author);	
+		ps.setString(3, publisher);	
+		ps.setString(4, price);
+		ps.setString(5, isbn);
+		int r = ps.executeUpdate();
+		if(r>0){
+			return this.retrieveBookByIsbn(isbn);
+		}else{
+			return null;
+		}	
 	}
 	
 }
