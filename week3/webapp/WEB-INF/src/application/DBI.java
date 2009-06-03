@@ -81,8 +81,39 @@ public class DBI {
         }
     }
 
-    public Book updateBook(Book target, String author, String publisher, String price, String isbn) throws SQLException {
-
+    public Book updateBook(Book target, String field, String value) throws SQLException {
+        if (
+              field == "author"
+           || field == "title"
+           || field == "publisher"
+           || field == "isbn"
+           || field == "price"
+        ) {
+            throw new SQLException("Invalid field(" + field + ")");
+        }
+        String sql = "update booklist set " + field + " = ? where booklist.id = ?";
+        PreparedStatement ps  = connection.prepareStatement(sql);
+        ps.setString(1, value);
+        ps.setInt(2, target.id);
+        int r = ps.executeUpdate();
+        if(r>0){
+            return this.retrieveBookById(target.id);
+        }else{
+            return null;
+        }
     }
 
+    public Boolean deleteBook(Book target) throws SQLException {
+        if (target == null) {
+            return false;
+        }
+        PreparedStatement ps  = connection.prepareStatement("delete from booklist where booklist.id = ?");
+        ps.setInt(1, target.id);
+        int r = ps.executeUpdate();
+        if (r>0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

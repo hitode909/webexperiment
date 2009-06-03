@@ -87,9 +87,13 @@ public final class book_jsp extends org.apache.jasper.runtime.HttpJspBase
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_header.jsp" + (("_header.jsp").indexOf('?')>0? '&': '?') + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode("title", request.getCharacterEncoding())+ "=" + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode(String.valueOf( book.title ), request.getCharacterEncoding()), out, true);
       out.write("\n");
       out.write("\n");
+      out.write("<script type=\"text/javascript\" src=\"js/deletebook.js\"></script>\n");
+      out.write("<script type=\"text/javascript\" src=\"js/amazonlink.js\"></script>\n");
       out.write("<script type=\"text/javascript\" src=\"js/instantedit.js\"></script>\n");
       out.write("<script type=\"text/javascript\">\n");
-      out.write("setVarsForm(\"\");\n");
+      out.write("setVarsForm(\"bookid=");
+      out.print( book.id);
+      out.write("\");\n");
       out.write("var urlBase = \"update.jsp\";\n");
       out.write("</script> \n");
       out.write("\n");
@@ -138,6 +142,14 @@ public final class book_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("  </tr>\n");
       out.write("</table>\n");
       out.write("\n");
+      out.write("<p>\n");
+      out.write("<form>\n");
+      out.write("  <input type=\"button\" value=\"削除\" onclick=\"deleteBook(");
+      out.print( book.id );
+      out.write(");\">\n");
+      out.write("</form>\n");
+      out.write("</p>\n");
+      out.write("\n");
  }else{
      if(creating_book){
 
@@ -149,9 +161,10 @@ public final class book_jsp extends org.apache.jasper.runtime.HttpJspBase
    }
    }
 
-      out.write('\n');
-      out.write('\n');
-      out.write('\n');
+      out.write("\n");
+      out.write("\n");
+      out.write("<div id=\"amazon-loader\"></div>\n");
+      out.write("\n");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_footer.jsp", out, true);
       out.write('\n');
     } catch (Throwable t) {

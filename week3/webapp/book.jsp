@@ -35,9 +35,10 @@
   <jsp:param name="title" value="<%= book.title %>" />
 </jsp:include>
 
+<script type="text/javascript" src="js/deletebook.js"></script>
 <script type="text/javascript" src="js/instantedit.js"></script>
 <script type="text/javascript">
-setVarsForm("");
+setVarsForm("bookid=<%= book.id%>");
 var urlBase = "update.jsp";
 </script> 
 
@@ -75,6 +76,12 @@ var urlBase = "update.jsp";
   </tr>
 </table>
 
+<p>
+<form>
+  <input type="button" value="削除" onclick="deleteBook(<%= book.id %>);">
+</form>
+</p>
+
 <% }else{
      if(creating_book){
 %>
@@ -85,5 +92,6 @@ var urlBase = "update.jsp";
    }
 %>
 
+<div id="amazon-loader"></div>
 
 <jsp:include page="_footer.jsp" flush="true" />
