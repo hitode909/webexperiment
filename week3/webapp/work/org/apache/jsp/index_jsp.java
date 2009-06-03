@@ -63,11 +63,13 @@ Boolean has_search_query = (request.getParameter("search") != null);
 
       out.write('\n');
       out.write('\n');
- if(has_search_query){ 
+ if(has_search_query){
+   String query_title = request.getParameter("search") + "を検索";
+   
       out.write('\n');
       out.write(' ');
       out.write(' ');
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_header.jsp" + (("_header.jsp").indexOf('?')>0? '&': '?') + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode("title", request.getCharacterEncoding())+ "=" + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode("本を検索中", request.getCharacterEncoding()), out, true);
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "_header.jsp" + (("_header.jsp").indexOf('?')>0? '&': '?') + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode("title", request.getCharacterEncoding())+ "=" + org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode(String.valueOf( query_title ), request.getCharacterEncoding()), out, true);
       out.write('\n');
  }else{ 
       out.write('\n');

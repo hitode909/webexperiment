@@ -12,9 +12,11 @@ Application app = new  Application();
 Boolean has_search_query = (request.getParameter("search") != null);
 %>
 
-<% if(has_search_query){ %>
+<% if(has_search_query){
+   String query_title = request.getParameter("search") + "を検索";
+   %>
   <jsp:include page="_header.jsp" flush="true" >
-  <jsp:param name="title" value="本を検索中" />
+  <jsp:param name="title" value="<%= query_title %>" />
   </jsp:include>
 <% }else{ %>
   <jsp:include page="_header.jsp" flush="true" >

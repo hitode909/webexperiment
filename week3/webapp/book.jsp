@@ -32,31 +32,47 @@
 %>
 
 <jsp:include page="_header.jsp" flush="true" >
-  <jsp:param name="title" value="本の詳細" />
+  <jsp:param name="title" value="<%= book.title %>" />
 </jsp:include>
+
+<script type="text/javascript" src="js/instantedit.js"></script>
+<script type="text/javascript">
+setVarsForm("");
+var urlBase = "update.jsp";
+</script> 
 
 <% if(has_book){ %>
 <table border="1" >
-<tr>
-  <td>書名</td>
-  <td><% out.println(book.title); %></td>
-</tr>
-<tr>
-  <td>著者</td>
-  <td><% out.println(book.author); %></td>
-</tr>
-<tr>
-  <td>出版社</td>
-  <td><% out.println(app.tagg.searchlink(book.publisher)); %></td>
-</tr>
-<tr>
-  <td>価格</td>
-  <td><% out.println(book.price); %>円</td>
-</tr>
-<tr>
-  <td>ISBN</td>
-  <td><% out.println(book.isbn); %></td>
-</tr>
+  <tr>
+    <td>書名</td>
+    <td>
+      <span id="title" class="editText"><% out.println(book.title); %></span>
+    </td>
+  </tr>
+  <tr>
+    <td>著者</td>
+    <td>
+      <span id="author" class="editText"><% out.println(book.author); %></span>
+    </td>
+  </tr>
+  <tr>
+    <td>出版社</td>
+    <td>
+      <span id="publisher" class="editText"><% out.println(book.publisher); %></span>
+    </td>
+  </tr>
+  <tr>
+    <td>価格</td>
+    <td>
+      <span id="price" class="editText"><% out.println(book.price); %></span>円
+    </td>
+  </tr>
+  <tr>
+    <td>ISBN</td>
+    <td>
+      <span id="isbn" class="editText"><% out.println(book.isbn); %></span>
+    </td>
+  </tr>
 </table>
 
 <% }else{
